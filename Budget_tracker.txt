@@ -1,0 +1,5 @@
+Ordered components :
+
+ESP8266 - from xcluma - Rs350
+DHT11 - Core technologies - Rs175
+PIR motion sensor - electronicspices - Rs99 
