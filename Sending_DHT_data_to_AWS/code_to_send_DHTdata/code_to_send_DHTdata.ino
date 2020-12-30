@@ -18,7 +18,7 @@ const char* password = "jyothinaresh";
 
 // Find this awsEndpoint in the AWS Console: Manage - Things, choose your thing
 // choose Interact, its the HTTPS Rest endpoint 
-const char* awsEndpoint = "a31zfhb7x7v56l-ats.iot.ap-northeast-1.amazonaws.com";
+const char* awsEndpoint = "a2zbvuc7hd3qk3-ats.iot.ap-south-1.amazonaws.com";
 
 // For the two certificate strings below paste in the text of your AWS 
 // device certificate and private key, comment out the BEGIN and END 
@@ -28,54 +28,54 @@ const char* awsEndpoint = "a31zfhb7x7v56l-ats.iot.ap-northeast-1.amazonaws.com";
 // xxxxxxxxxx-certificate.pem.crt
 const String certificatePemCrt = \
 //-----BEGIN CERTIFICATE-----
-R"EOF(MIIDWjCCAkKgAwIBAgIVALgI7rxGmpteVTkJmClKbQo4m0jJMA0GCSqGSIb3DQEB
-CwUAME0xSzBJBgNVBAsMQkFtYXpvbiBXZWIgU2VydmljZXMgTz1BbWF6b24uY29t
-IEluYy4gTD1TZWF0dGxlIFNUPVdhc2hpbmd0b24gQz1VUzAeFw0yMDEwMjkxMDQy
-MDJaFw00OTEyMzEyMzU5NTlaMB4xHDAaBgNVBAMME0FXUyBJb1QgQ2VydGlmaWNh
-dGUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC8FUaJuRYZGc1eB7+B
-Pe45vB7SFf9A7fG+3i0mGJ3hdNlDVF+5Uj7elCEVe91c7Kv1kv0vHOmgkwGPhqKM
-6ZdEDza4Cm3Ni6OSw/TzGyNcnRKEDJ3/W/AXeEyI63v/g9CR0Kz05MOcWaNivIgL
-9F7Kkywp/4H97STLw7SHk5JHZlTlkUlcoJnMYo3lMEdlfClPT9PYeS3o+KW5s4lA
-+j0QqQMpfUiqdiI442A26fJcKzIOzqtBY1z/fXDrEcM0fkddIBK4CLXeFMgFEdm9
-W4AiLLT2dRorPK9YNSh8vvAejAc8I9Ldl7s1swkJ3BOU/UCZEO13jeTB7y2jPEVn
-1mhhAgMBAAGjYDBeMB8GA1UdIwQYMBaAFBIPFp6N5j5IZBEugq0Hm2SKeXToMB0G
-A1UdDgQWBBRFBSY9Mo0ITfbHyk6bkfNpdg5SaTAMBgNVHRMBAf8EAjAAMA4GA1Ud
-DwEB/wQEAwIHgDANBgkqhkiG9w0BAQsFAAOCAQEAPDjH0tHV67yXsbB2KNHzCs8r
-uBZAeSP+xR+j1t24vwZRy12WXDBnQ0r9uDgI2PC67bziOoh9P7Zb0xS2NshVnbK1
-SfihPxo6hipvGnP/FbX89/7u2taW4MfzRtS5oyanBHFvdS5ZBJfJN6VEuEFnLj9p
-Q6dwUocKCxzZmsX31eIZU1wSWesKxYECxUKgu7QIp82nqC/x2VnSMtG2kbGyE9yP
-R5GNXksghZoli8XYoOkvTmMqwXbECI6N5MMfhneAYvtVOSmxHpaXbiXKOGC+fMLr
-nxDsDG6g3NfdF5e5VydVN+orCt91QN8BS+TPQ5sGAqD1bryuqxNRa74THNnCtw==)EOF";
+R"EOF(MIIDWTCCAkGgAwIBAgIUEYFuaQXcP7UEUdtCbZ6G1HepKAgwDQYJKoZIhvcNAQEL
+BQAwTTFLMEkGA1UECwxCQW1hem9uIFdlYiBTZXJ2aWNlcyBPPUFtYXpvbi5jb20g
+SW5jLiBMPVNlYXR0bGUgU1Q9V2FzaGluZ3RvbiBDPVVTMB4XDTIwMTIxMDE0NDU1
+OVoXDTQ5MTIzMTIzNTk1OVowHjEcMBoGA1UEAwwTQVdTIElvVCBDZXJ0aWZpY2F0
+ZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAK+13X0n1LnYt6e/mTo4
+7VZPk2bJyqvmkz0ZAs0sC3VKDB/8lQBLM748Bp0lk5vL4nbmTkTw/xdWrIGHtSYF
+a8Szj6tw0TtWRgcqpJPq71lebpBIR7XpRA7dqpMrtYXV05GZvtA+NZw/4ZbwH5Vz
+1QcKxri5SqSPb+wFw5Wx5vF31SfSDWWbQ4RxEBBq19FLwVWPJUKp9p3kIVVEbf4e
+lZnjtfLRah6jX4Zz9hAdbFtcdWw7op+AsNUGRp+49FRmaSetH3zPFwTY12yykQcz
+m6PRNex996YgOoUj4ud5AlbZaO03ibWAROFaXVC51flmiP2Kehciz8wj1AYejuKN
+ShECAwEAAaNgMF4wHwYDVR0jBBgwFoAU2yGdqgF4ghIhuBETtFG0ENEbx6EwHQYD
+VR0OBBYEFPNDfPGIKkXJhljX9VS9PP7/19c7MAwGA1UdEwEB/wQCMAAwDgYDVR0P
+AQH/BAQDAgeAMA0GCSqGSIb3DQEBCwUAA4IBAQAQcLfgccLQBZ+Paq6tBXDBiwkh
+24QKsRyhzSyE9YfUiMLQumbWMTzeQUfaPfGpwoGJXeXVJpzv7kJto9zLMQPgNGOH
+tqw2h2q895UarTVGlwpHohQWahaWgGrJG14ePpvAkS1QhnxgiDFHWk1AVfs+mbe/
+waIwDHe/gcsiN9XOz1+5czeM6hps0mxiUhGulRqp6cEG/JFKmaYbn0wr/igRSnRk
+FQICZm8FoAuyNUyw6uNC0dO11oo7mRWX8qrh7Do5MXcTFYsFDZxZeP+uwxcycxF6
+LxZ2dFxH0SPsN2GrZRO9WkxIxeWnnq7ji35Yw4/TAGf3GxiRxfwFpfQEqge/)EOF";
 //-----END CERTIFICATE-----
 
 // xxxxxxxxxx-private.pem.key
 const String privatePemKey = \
 //-----BEGIN RSA PRIVATE KEY-----
-R"EOF(MIIEowIBAAKCAQEAvBVGibkWGRnNXge/gT3uObwe0hX/QO3xvt4tJhid4XTZQ1Rf
-uVI+3pQhFXvdXOyr9ZL9LxzpoJMBj4aijOmXRA82uAptzYujksP08xsjXJ0ShAyd
-/1vwF3hMiOt7/4PQkdCs9OTDnFmjYryIC/ReypMsKf+B/e0ky8O0h5OSR2ZU5ZFJ
-XKCZzGKN5TBHZXwpT0/T2Hkt6PilubOJQPo9EKkDKX1IqnYiOONgNunyXCsyDs6r
-QWNc/31w6xHDNH5HXSASuAi13hTIBRHZvVuAIiy09nUaKzyvWDUofL7wHowHPCPS
-3Ze7NbMJCdwTlP1AmRDtd43kwe8tozxFZ9ZoYQIDAQABAoIBACa0AhXpHmD/7EDD
-O2cvBUygJ393w1TrIeny8jt6qVJxpxuxyxjpkcJfnQc8u+qZUTFxk+QUAQdn+NQ+
-EkkI8HWy48Gvc7TuXTSgWlGEbhxqvhqqNgEMPDW4LZenTZbg2xSGanDielY8I+D3
-hs9e8/qfmmDyER/dosrDdOzJMzq5u3tamN6RsC9UFDtU1tE6dxq+IO5OyDundOkE
-ZkUWTNjJq0AvfuJ+4y1csdIIPx5AsjO/NPqh708inGGtFId1I8x9r7wxDh1CRIDV
-xK0s4+gFKNn883D1k5OZNrjyQ/yBdlEEAF68Sqo3EQs/1HPLoS6dP3zGWCcS+6wf
-27Rq7JkCgYEA7XupH2Ou5BtX8mB90ARPxaucNZxEJqlnuVQYuPKr30vOLURIV3Z3
-N/GgpUhh6TnPUYpuXtDj3hXQrQcXXbv/D/uEwOY02B8BbR8ut+DNu/hN+i/v97ns
-Ohy8kHGm3POuoBujLPClKxh/dYolfrKhDMDcpAYULy9bPlXPWbcMZSMCgYEAyr+O
-GyTSTFGNv3uQrKTD5wOxRTx6dOJA2AnbEIPTjL/VZ9/qW6hwjS7GhfTVFVl876gm
-k9rvdN6g5CfVEpUNma4xRzrJYciit2+77GNz5DBhPNxalhYtojLp88OzVdHieX47
-mdav8fqexCoVunBjBIkAHuI8TUFFybvWZDmkXqsCgYAbxnfMTQtacHxDw9dTKf3u
-f5jAiGtMHkocWeKeVvuVHTebAb54REnDSEZirmmNLo652bf47POJuQF0Cz1HYEJ/
-qwomyYXqtQ2kpp3/MZK+ZlcwaMTnM16WmV/QgQpkEzgcT78w9WBL/wyBQcwK2neN
-l0z2/iMENcS1MLIUqx0PAwKBgQCz8SC5XIu8qmDowk0bvLwVqwRJE60HUcsFMnIX
-jThTYeqQX33LTYpe81XEjBAV+69TsGRUs2n0yqX2+Jc1/83rSFt6AWW8AGrR7TvX
-SEkSDBIxBszrCdIEc7WJ4HWoxDeBZpSVK6JKXAlOxp80MgzfeIv/3QBx/G1o5uoX
-V8VXMwKBgFhYAoJDgHYBfV/1CAxa0GX9gIluN0uOJSfRfGkquEf392+raVsNf8t9
-rPTw+aaOOBbpQqnZ2WrKC/l5YxTUyBIdBYmXQPNiTpslU5CAl0ektcxZx9cggK+u
-WlEdn3lhE+X0hrUvv5bK9/D2Z1A8W3BpE5YmknVRAMfuRcqumxh2)EOF";
+R"EOF(MIIEpAIBAAKCAQEAr7XdfSfUudi3p7+ZOjjtVk+TZsnKq+aTPRkCzSwLdUoMH/yV
+AEszvjwGnSWTm8viduZORPD/F1asgYe1JgVrxLOPq3DRO1ZGByqkk+rvWV5ukEhH
+telEDt2qkyu1hdXTkZm+0D41nD/hlvAflXPVBwrGuLlKpI9v7AXDlbHm8XfVJ9IN
+ZZtDhHEQEGrX0UvBVY8lQqn2neQhVURt/h6VmeO18tFqHqNfhnP2EB1sW1x1bDui
+n4Cw1QZGn7j0VGZpJ60ffM8XBNjXbLKRBzObo9E17H33piA6hSPi53kCVtlo7TeJ
+tYBE4VpdULnV+WaI/Yp6FyLPzCPUBh6O4o1KEQIDAQABAoIBAQCZFQA/ztjlhWsU
+KbgMYpZb8P5BuiLpuvuiakznha0B5Z5Eq+EAnYQaA9/bP2angGzwG9wq8i+8HJY0
+T5BB7M0kVTAhNCwF3zcpfTxfZnpayQvYhjB7yxuxO+wlRhpi3JTzsBfvA5PfakRX
+JSLPKVh6Ryg0vbHLRvBCmA77N0A2NDaQ+JvRdSavoW0Hu2wl3putekxy8EYwZQZJ
+JBSWtp6tBPTAa1EYoeltphpSw6ozX/J7U75kMVjjIlwZnAm8awlvwbcw544B9ifG
+/DBSDmJQ29nFKkPigC1fUG+/4XQE9z03SoGGGh68q8pK6K7okXCk0bm4wTumHfZL
+YleVWIbVAoGBAOiERVdr7csGxykROkO/R40XNXiLVySfJ+WIO+qrmqtKu+qXJ0Mq
+vVcSEsM72ILSMpHLjNEPMhdqt9gBP3Cy+yoghipYgD5Z5x7R9XP3BnZm4pIBJ8pw
+1i5zhx2L9MwY8Nm5j1E5KvUfm2QOU1cslYzxaSB8GZOlgyNIZWJ9idSrAoGBAMF0
+3ZrYQcvh3fsYmcuoHpHVc79DgSPIJ842Sd8hIKWLvnQIqNToWCPsUETDoEnDOb5q
+xEBgSM03cqP97zBsAJq+zwMVQfhIpSR2FLsKqtZEbrhugjSOzdM8q1ML9otI60Me
+AvS/zdTV3tkE6G5JLSTbHk/sYdeuTHNhqvApz8QzAoGAFZ7nC7//dpeEwW7WqiIJ
+NzdnQ3RBgChEf3VxjNq0ISVr3956SiaZQJVvpTPVaCS/iwsQZwgwsji8K5vCGGqs
+LDimAR4FnsahVR5U4pmfwjbC7qyo1Iw1flBDyh2Pf8L58mTszLKyKeTsgBtM6Jg+
+t8Ji8iBYCICldwxuUQA3Zs0CgYBYcmDa6aJzX4nIwj+Wb//B9xAbUvaY8GraidGO
+VSwC4/goPslJxgx+KA2u0q3W643b9B5TvHGseXxNY8zWm5pPJYupwi9OH5B5Mg9a
+UI84tULVyZh4BQ4vVJ6TsnV+ytDc97ysP4EQnNNs7ySBP62HGzMpoU4+eK71VaL8
+eHFIJwKBgQCvha0Fay+ZMXIqXOQDytIbvNqwfXhT4UBClK6LoRDu9LzJ5CF0X6Xo
+OixwNCT99dXoqWhGy4kmBm0szRpWe1Wg3M6JEwgpzlUWf+fm0cMASvzxRo8h6rPE
+gqLL3jOvTNKttXkgxJUo9hg0/FSvHHFEkkVgyfD/ng5yCfLy4J0u4A==)EOF";
 //-----END RSA PRIVATE KEY-----
 
 // This is the AWS IoT CA Certificate from: 
@@ -110,8 +110,8 @@ WiFiClientSecure wiFiClient;
 void msgReceived(char* topic, byte* payload, unsigned int len);
 PubSubClient pubSubClient(awsEndpoint, 8883, msgReceived, wiFiClient); 
 
-//The above command uses port83 - HTTPS
-//To use MQTT, use port 443
+//The above command uses port83 - MQTT
+//To use HTTPS, use port 443
 //PubSubClient pubSubClient(awsEndpoint, 443, msgReceived, wiFiClient);
 
 //------------------------------------------------------------------------------------------------
@@ -168,11 +168,11 @@ void loop() {
     t = 0;
   }
 
-  snprintf(fakedata,sizeof(fakedata),"{\"temp\" :%f,\"humidity\" :%f}",t,h); 
+  snprintf(fakedata,sizeof(fakedata),"{\"Channel\" : 2, \"temp\" :%f,\"humidity\" :%f}",t,h); 
   
   if (millis() - lastPublish > 10000) {
     //String msg = String("Hello from ESP8266: Penguin here ") + ++msgCount;
-    pubSubClient.publish("outTopic",fakedata); //msg.c_str());
+    pubSubClient.publish("DHTChannel",fakedata); //msg.c_str());
     Serial.print("Published: "); Serial.println(fakedata);
     lastPublish = millis();
   }
@@ -195,7 +195,7 @@ void pubSubCheckConnect() {
     Serial.print("PubSubClient connecting to: "); Serial.print(awsEndpoint);
     while ( ! pubSubClient.connected()) {
       Serial.print(".");
-      pubSubClient.connect("ESPthing");
+      pubSubClient.connect("ESPthing3");
     }
     Serial.println(" connected");
   }

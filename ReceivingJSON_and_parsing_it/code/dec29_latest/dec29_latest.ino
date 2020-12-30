@@ -1,4 +1,5 @@
 
+#include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 extern "C" {
@@ -17,54 +18,54 @@ const char* awsEndpoint = "a2zbvuc7hd3qk3-ats.iot.ap-south-1.amazonaws.com";
 // xxxxxxxxxx-certificate.pem.crt
 const String certificatePemCrt = \
 //-----BEGIN CERTIFICATE-----
-R"EOF(MIIDWjCCAkKgAwIBAgIVAIp3OdSW8G7bqlNBKsrLjgvlN3ffMA0GCSqGSIb3DQEB
-CwUAME0xSzBJBgNVBAsMQkFtYXpvbiBXZWIgU2VydmljZXMgTz1BbWF6b24uY29t
-IEluYy4gTD1TZWF0dGxlIFNUPVdhc2hpbmd0b24gQz1VUzAeFw0yMDEyMTAxNDUw
-NDNaFw00OTEyMzEyMzU5NTlaMB4xHDAaBgNVBAMME0FXUyBJb1QgQ2VydGlmaWNh
-dGUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC8ii4XtPkmsF06JtQY
-ubftYFKS4VUtMk+rHEvfZyqer30HCTPPp0gqe5HWkgTm1DCtHLT4RHj8l3dONJgB
-Yhzjd77r1p94MnEPEcmeoIJytXprIv0a6etWiPV2IsylRhPMqWOvgq9knhr7iaMj
-7WtAZhwUbOWUKBai5+VOF1cucR8VeBaHV11Sb/Rkp2Yf62A3+GLg+cv2Vw4vogst
-6JhVgxfLjYBgxdHGcZ/F7HWNXZ78FSpnJf6fdDQb98x1VKxMsvKEdgxO1WOQdVjl
-6dS2g9TM2tnt94h4fYzZ84uhctaTMsf6SkcUs3THUpUs1j3+8mm1VR0Tk5MZoOoF
-AMwNAgMBAAGjYDBeMB8GA1UdIwQYMBaAFP6A2ANHylCYf5YuY+9MQTAmQQUkMB0G
-A1UdDgQWBBSLgouhgH+ByQyD0kNi4cl2hJ5TfjAMBgNVHRMBAf8EAjAAMA4GA1Ud
-DwEB/wQEAwIHgDANBgkqhkiG9w0BAQsFAAOCAQEAhDu8LPzbc/FzWP0bERq9hoZj
-i1PBul0QCoGSxNSSoKphSNSRLBaw+ILnDUrs695Kvi9SLTpA6w2rHALexBV07Uea
-6127Cd7c3EhR6QJBQSUkivl9qYB5S18sTOU6geOptdZ+ULGPGSBJfiUL179HShrC
-bCnrto4ngfyAZS+sdEiDakzzJiyVvs6b1ahr2xh0sg2d5SmOGOLmE3JXc0h19ESz
-ij6ObohMBNNm0swbbezwlSVzaCu0DA1YAkTD096Tic8IvzbzIrRpgauQRK7vaZpq
-/1wR6yGIfp8/KowI01G4IyFnxqVhLq3Kyr4eUbbzezsCznZLN0Cv4Qde2HnkvQ==)EOF";
+R"EOF(MIIDWTCCAkGgAwIBAgIURqRG0bEcqgT+8dpO/1rSdELEGwswDQYJKoZIhvcNAQEL
+BQAwTTFLMEkGA1UECwxCQW1hem9uIFdlYiBTZXJ2aWNlcyBPPUFtYXpvbi5jb20g
+SW5jLiBMPVNlYXR0bGUgU1Q9V2FzaGluZ3RvbiBDPVVTMB4XDTIwMTIxMDE2NDYw
+OFoXDTQ5MTIzMTIzNTk1OVowHjEcMBoGA1UEAwwTQVdTIElvVCBDZXJ0aWZpY2F0
+ZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKhUOg+AYPzBFe7SKPZz
+KyLV4jKWv72BxtYdNSVHMxrH+b/jORRJjnIid0MeMStJ4REKUKYpLO+MpPS+JF6r
+ltH/6hGhBzyHi3FU0Wm7s5RDD8velybMHWxVn+brE9vp9cPatYf8Q0AHmtm8iVuF
+d4/UAsEibJNLFMZVxS+KvNLO77sfJKyqvdq/x7shpYXQbWEwhov4cOcDRbyzJ/q0
+k/6iyevSCsL0wcSSuiOrmX2zl360pPS4eBZCxTu51Th17KBAgvDFGV+HNouqrg6o
+nIHR8iFfZlHJoueXBKg4iesghzeZVMO5dcrMdDRznNtJk2pqVYQoBba3tru1GJlU
+uEUCAwEAAaNgMF4wHwYDVR0jBBgwFoAUzaHTWPVtqIKxp66c3JEfJi9KO+owHQYD
+VR0OBBYEFBGNUn6DwBd8oExPErX/1bZo5KXNMAwGA1UdEwEB/wQCMAAwDgYDVR0P
+AQH/BAQDAgeAMA0GCSqGSIb3DQEBCwUAA4IBAQBgcg0RothpxIssQuanok4C+wCw
+Z3KXHVXpp640w3L6KWqUt9OAnQiu5QGZ1zuimSC5SjJ9OtS1SQAov77a+QAAr3r1
+RatPFNF8RM33p/Le5zjXgjBvtkEi2riQ0Wrt0w7WhkasliQ+IcvVqFeW/ehVO9Nk
+m0RsPo3yos/KQibNFL6CAN3kZL8aEGGedRafyaVLYEmQmUqGx/DUyv3GXAcuW6NZ
+7GLAecd1xtGMUM5fMe0Yg4t97bXuCQXKMKyG4mGw8qkh+h7lAiquWT4/2DqrbZAQ
+yWird+zWCT4+52++rdTcZQS3cXQt+1y5QqrrSi3YYCgfP0URjX6WUHwzkxx/)EOF";
 //-----END CERTIFICATE-----
 
 // xxxxxxxxxx-private.pem.key
 const String privatePemKey = \
 //-----BEGIN RSA PRIVATE KEY-----
-R"EOF(MIIEpAIBAAKCAQEAvIouF7T5JrBdOibUGLm37WBSkuFVLTJPqxxL32cqnq99Bwkz
-z6dIKnuR1pIE5tQwrRy0+ER4/Jd3TjSYAWIc43e+69afeDJxDxHJnqCCcrV6ayL9
-GunrVoj1diLMpUYTzKljr4KvZJ4a+4mjI+1rQGYcFGzllCgWouflThdXLnEfFXgW
-h1ddUm/0ZKdmH+tgN/hi4PnL9lcOL6ILLeiYVYMXy42AYMXRxnGfxex1jV2e/BUq
-ZyX+n3Q0G/fMdVSsTLLyhHYMTtVjkHVY5enUtoPUzNrZ7feIeH2M2fOLoXLWkzLH
-+kpHFLN0x1KVLNY9/vJptVUdE5OTGaDqBQDMDQIDAQABAoIBAQCLFXxvLKfn7I65
-iU9JdifCyx3fEK9fChBPcC5gfaCpM1gOSrGX7BWGkWXCXjGTftDxw42U4B5IaAww
-+wdvbctV2k5TeB5n8v4IWdzcUhgpOss2IbeJlSpwydQZ9A33ljyg7AyHuuZcWW4a
-RSy+IjTOawUn5DVwGCqqvlsgQoOj07cj6qD05jIcb5UT73/TnOb8mwSrmVHt0PUB
-15RvrYkSmlhoejV/s8f7iuIX5MpNl0Bqo2AO+LhAvkj36VZW8SyV1zPktwr0eZyO
-K9sknCULLoine92aJ0KFPanNqeana6bUA/MqIOz8Pq1Yggi6CwUfBZIQD3G4vtZu
-irDBdeZBAoGBAN+ZY0uIov5m97a3rG0o707R/teNMosLpdbkMdk4oAWyXTSv11+I
-adha81JxBUFYBBvYqkx2U4EMx68+Ymmc8qyYKEbJnu+3s534iibOGXR7pZyHMWMO
-e+eqqn/WiGBRcRYklLe1YiImx+Sy6/7ugPGPFS1Vz/9iV+NZqm62tyaFAoGBANfc
-O2aRwXnr+spcNHKOmj3u6xTp3VDT+KdrvFPZ4u72ihD4eWHex+QzUVOuhj+aAKNg
-OmxQs/O+H4gQE5xkQHjtZvuaP7bPLEWhs7dxp85iLnwaYxtnera74ihfKgl4LKFv
-m9rBfa8zeq7Doa9aTbhnt3Gc1zEy3cwKN1yaiNnpAoGBALBA7PCBiFoZOHKjXhu+
-BMWQ6t1mw8yvJc66mkCsThevfaEmaxM3KJgPOXZm+MmFY9e/dp5HN5OmS1FsT48I
-1JIQbs895zb3C3Mek2f7Vj1nqig0uU1oAWugMD4NEfs6t3XI6CHXrL9W6oLwNu8B
-ekrvirXtysN49eaUq7AR/1UxAoGARhp8IB+OGi6NUFMJpXqylRKWvkAFZE6zHoxa
-qVDF5p2i0UghA6v6dx5Dd03iw50cP/LshmjfSHWif+nYtJ3KYnuXSncZ4iD+W87c
-MuNygBBa0GsxbKD6tYXnOP1PBaxFslgw4aadTt0FJuTaCbzmKNFmPjuVl6DRb4aR
-3D1D3KECgYAWHgh7odfcBHxHDe3EE51eEQB7oK2Jw1v0425rwZ2fx8JtVcizw9I1
-V7TjPBBv3m7FxISHXck3d529Lh21OeteIb3TpDIFvu8v0RSnE9gcyuqxA0q+j8eN
-c6ZkNQBala8UbMVZfEIOQXlUvymgdV2tSw89AZFRTUvpfg/eLisG1Q==)EOF";
+R"EOF(MIIEowIBAAKCAQEAqFQ6D4Bg/MEV7tIo9nMrItXiMpa/vYHG1h01JUczGsf5v+M5
+FEmOciJ3Qx4xK0nhEQpQpiks74yk9L4kXquW0f/qEaEHPIeLcVTRabuzlEMPy96X
+JswdbFWf5usT2+n1w9q1h/xDQAea2byJW4V3j9QCwSJsk0sUxlXFL4q80s7vux8k
+rKq92r/HuyGlhdBtYTCGi/hw5wNFvLMn+rST/qLJ69IKwvTBxJK6I6uZfbOXfrSk
+9Lh4FkLFO7nVOHXsoECC8MUZX4c2i6quDqicgdHyIV9mUcmi55cEqDiJ6yCHN5lU
+w7l1ysx0NHOc20mTampVhCgFtre2u7UYmVS4RQIDAQABAoIBABSnKOyH+t5oLnG7
+9WyvmsZOac99MY9l4eiZctDdGIcbrCgAEBvOHp0gX3Oru6qtCOFXW6fXe3z0y7R/
+s+SttvaTKLv6/vFNTC2ek4cekZ0KUWDZMcB/4MhPBSyHAUvFO/NI3WcO641qoXQ/
+rra8/Ht4LtJVj+7OkoD3OxdnNV3D9TMI6xNg6ugHmiOO2AMTi0aqmL7bnTEPaRkB
+N30HazUJ+z49UXLeivs50DVkQ/OimRrRHHClNUcLWIytW+DZf3MzUfOUAnZsuUQP
+CRYaCPtpWcdSC8Ho4eIQGdjPgAeZROjRdYGn845q6IGNXC0iRaxbuK8uWsaXWPXi
+g4iZJU0CgYEA0RPzUL0qIq2IK5vSobcgwQOYB+/RxnUO/AtX+rR5JY+GlQ3Oyojv
+cXQ26a6xOpb/LhpQ1kLbblZnBOBoHv0m6lKimXFAfenF2Npqx9HGQWjgEqti5M3H
+DuLBU8XjTuyNWTa5yYhSsHgA8GKJvZsZJ5hU6y3/cPQKkoESVc9do3MCgYEAzhsm
+KEsxUsgGCNcKIjbOizd9tOi9MFRTqn7SMvce3cC72/jFBRFdidGPHxZgLInZ3C68
+6RhjpY0G5zqP3xqBNMYwtPh3pfvxEUJSCq/Hi+vB+/cfRO574hWlJISwk06B+LzT
+f8yH8CHY0zz8L9iLxGcJIAAqfiBN9rHpzrE892cCgYEAlrMwoDOZGWHHUteAHPwo
+abczcBUWOVvKrzVl9tj6sW4gbXOEaEwHetlvc0RtjnOj/xEMz0NlcsRogQVXR27l
+C+UAOmV9PMSxzLqyWNEFe8QiLpLGN3FzV3FuM/ng+9RZlcJya6cNIxF8a8g6zCXt
+HbMZEmMXSc09iZfrJVrQfa0CgYA8BfAQ4AUXRKVtQaLz39468Qgs/XLLdmN/TbvN
+l+ZnUk/jegl2tl31WxBBT3Tmw6as1vexMqcieXW/NXDc2o0yX12j9pBxyHOmQRg/
+gH2upBQ0Wv3CR2nQp9kWT4ZVABId7G/z0g7swg6xRhtzm67ondEsfp/hZ2sNIzci
+OL+2lQKBgDfZVL8pkYVS4Q2EBoSIYaCeTmI0PLsxd/kDGkD1fXmRkP4xRA3bBgKF
+bbdSbhc2Ub7KB2Ej773eU1RQTkXxJHK7JoMNweeELqO9sOmaJvZJUJBHpr3cQGrq
+kVqKE42pVVZo0hWy9pUq40V+aXI3Za+t0EOl3R2QVFCUCsFqnHrt)EOF";
 //-----END RSA PRIVATE KEY-----
 
 // This is the AWS IoT CA Certificate from: 
@@ -99,14 +100,16 @@ WiFiClientSecure wiFiClient;
 void msgReceived(char* topic, byte* payload, unsigned int len);
 PubSubClient pubSubClient(awsEndpoint, 8883, msgReceived, wiFiClient); 
 
-//The above command uses port83 - HTTPS
-//To use MQTT, use port 443
+//The above command uses port8883 - MQTT
+//To use HTTPS, use port 443
 //PubSubClient pubSubClient(awsEndpoint, 443, msgReceived, wiFiClient);
 
 //------------------------------------------------------------------------------------------------
 void setup() {
   Serial.begin(115200); Serial.println();
-  pinMode (16,INPUT);
+  pinMode(5,OUTPUT);
+  pinMode(LED_BUILTIN,OUTPUT);
+ 
   Serial.println("ESP8266 AWS IoT Example");
 
   Serial.print("Connecting to "); Serial.print(ssid);
@@ -129,52 +132,25 @@ void setup() {
   len = b64decode(caPemCrt, binaryCA);
   wiFiClient.setCACert(binaryCA, len);
 
-//  Serial.print("Sensor Calibrating..wait for 2mins.");
-//  int j=120;
-//  while(j>0)
-//  { 
-//    Serial.print(".");
-//    delay(1000);
-//    j--;
-//  }
-//  Serial.print("\n");
+  digitalWrite(5,HIGH);
 }
 //------------------------------------------------------------------------------------------------
 
 
 unsigned long lastPublish;
+unsigned long lastOn=0;
+unsigned int motionFlag=0;
+unsigned long totalOntime=0;
 int msgCount;
-byte i;
-byte motion_detected;
+DynamicJsonBuffer jsonBuffer(256);
 
 //------------------------------------------------------------------------------------------------
 void loop() {
 
   pubSubCheckConnect();
 
-  i = digitalRead(16);
-  char fakedata[256];
-//  int temp=random(20,35);
-//  int humidity=random(50,83);
-  if(i==1)
-  {
-    snprintf(fakedata,sizeof(fakedata),"{\"Channel\" : 1, \"Motion\":1}"); 
-    
-  }
-  else
-  {
-    snprintf(fakedata,sizeof(fakedata),"{\"Channel\" : 1, \"Motion\":0}");
-   
-  }
-  if (millis() - lastPublish > 2000) {
-    //String msg = String("Hello from ESP8266: Penguin here ") + ++msgCount;
-    pubSubClient.publish("motionChannel",fakedata); //msg.c_str());
-    Serial.print("Published: "); Serial.println(fakedata);
-//    if(i==1){delay(10000);}
-//    else{delay(2000);}
-    lastPublish = millis();
-  }
 }
+
 //------------------------------------------------------------------------------------------------
 
 
@@ -184,6 +160,80 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
     Serial.print((char)payload[i]);
   }
   Serial.println();
+  JsonObject& root = jsonBuffer.parseObject(payload);
+    if (!root.success()) {
+      Serial.println(F("Parsing failed!"));
+      return;
+    }
+    else{
+    Serial.println("Success in parsing Json..!");
+    }
+
+   int c = root["Channel"];
+   if(c==1)
+   {
+    if(motionFlag==1)
+     {
+            if((millis()-lastOn >=10000))
+            {
+             int t = root["Motion"];
+         
+               if(t==1)
+               {
+                  motionFlag = 1;      
+                  totalOntime  = totalOntime + 10;                
+                  digitalWrite(LED_BUILTIN,LOW);
+                  digitalWrite(5,LOW);
+                  lastOn = millis();  
+               }
+               else
+               {
+                  motionFlag = 0;
+                  digitalWrite(LED_BUILTIN,HIGH);
+                  digitalWrite(5,HIGH);
+               }
+    
+         Serial.println("total on time :");
+         Serial.println(totalOntime);
+          }
+      }
+
+      else
+      {
+            int t = root["Motion"];
+         
+               if(t==1)
+               {
+                  motionFlag = 1;      
+                  totalOntime  = totalOntime + 10;                
+                  digitalWrite(LED_BUILTIN,LOW);
+                  digitalWrite(5,LOW);
+                  lastOn = millis();  
+               }
+               else
+               {
+                  motionFlag = 0;
+                  digitalWrite(LED_BUILTIN,HIGH);
+                  digitalWrite(5,HIGH);
+               }
+    
+         Serial.println("total on time :");
+         Serial.println(totalOntime);
+        
+      }
+    }
+    else if(c==2)
+    {
+      int te = root["temp"];
+      int hm = root["humidity"];
+      if((motionFlag==1)&&((te>28)||(hm>75)))
+      {
+        //do something like turn on a fan
+      }
+      
+    }
+   
+    
 }
 //------------------------------------------------------------------------------------------------
 
@@ -193,9 +243,11 @@ void pubSubCheckConnect() {
     Serial.print("PubSubClient connecting to: "); Serial.print(awsEndpoint);
     while ( ! pubSubClient.connected()) {
       Serial.print(".");
-      pubSubClient.connect("ESPthing");
+      pubSubClient.connect("ESPthing2");
     }
     Serial.println("connected");
+    pubSubClient.subscribe("motionChannel");
+    pubSubClient.subscribe("DHTChannel");
   }
   pubSubClient.loop();
 }

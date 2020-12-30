@@ -1,3 +1,4 @@
+
 #include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
@@ -167,39 +168,48 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
     Serial.println("Success in parsing Json..!");
     }
 
-   int t = root["Motion"];
-
-//   if((motionFlag==1)&&(millis()-lastOn < 10000))
-//   {
-//    if(t==1)
-//      {
-//      Serial.println("Motion happened less than 10 seconds ago");
-//      }
-//   }
-//   else
-//   {
-     if(t==1)
-     {
-        motionFlag = 1;
-//      digitalWrite(16,HIGH);
-
-        totalOntime  = totalOntime + 10;
-        
-        digitalWrite(LED_BUILTIN,LOW);
-        pubSubClient.unsubscribe("motionChannel");
-        delay(10000);
-        pubSubClient.subscribe("motionChannel");
-        lastOn = millis();  
-     }
-     else
-     {
-        motionFlag = 0;
-//      digitalWrite(16,LOW);
-        digitalWrite(LED_BUILTIN,HIGH);
-     }
-
-     Serial.println("total on time :");
-     Serial.println(totalOntime);
+   int c = root["Channel"];
+   if(c==1)
+   {
+    if(millis()-lastOn >=10000)
+    {
+     int t = root["Motion"];
+  
+  //   if((motionFlag==1)&&(millis()-lastOn < 10000))
+  //   {
+  //    if(t==1)
+  //      {
+  //      Serial.println("Motion happened less than 10 seconds ago");
+  //      }
+  //   }
+  //   else
+  //   {
+  
+       if(t==1)
+       {
+          motionFlag = 1;
+  //      digitalWrite(16,HIGH);
+  
+          totalOntime  = totalOntime + 10;
+          
+          digitalWrite(LED_BUILTIN,LOW);
+//          pubSubClient.unsubscribe("motionChannel");
+//          delay(10000);
+//          pubSubClient.subscribe("motionChannel");
+          lastOn = millis();  
+       }
+       else
+       {
+          motionFlag = 0;
+  //      digitalWrite(16,LOW);
+          digitalWrite(LED_BUILTIN,HIGH);
+       }
+  
+       Serial.println("total on time :");
+       Serial.println(totalOntime);
+    }
+   }
+   
     
 }
 //------------------------------------------------------------------------------------------------
@@ -214,7 +224,7 @@ void pubSubCheckConnect() {
     }
     Serial.println("connected");
     pubSubClient.subscribe("motionChannel");
-    pubSubClient.subscribe("outTopic2");
+    pubSubClient.subscribe("DHTChannel");
   }
   pubSubClient.loop();
 }
