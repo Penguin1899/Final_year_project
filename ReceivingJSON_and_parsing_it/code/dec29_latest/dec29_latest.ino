@@ -142,7 +142,12 @@ unsigned long lastOn=0;
 unsigned int motionFlag=0;
 unsigned long totalOntime=0;
 int msgCount;
-DynamicJsonBuffer jsonBuffer(256);
+//StaticJsonBuffer<200> jsonBuffer;
+
+//DynamicJsonBuffer jsonBuffer(50);
+
+//String dummy = "\"Channel\" : 1"; 
+//JsonObject& root = jsonBuffer.parseObject(dummy);
 
 //------------------------------------------------------------------------------------------------
 void loop() {
@@ -159,6 +164,7 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
   for (int i = 0; i < length; i++) {
     Serial.print((char)payload[i]);
   }
+  DynamicJsonBuffer jsonBuffer(50);
   Serial.println();
   JsonObject& root = jsonBuffer.parseObject(payload);
     if (!root.success()) {
@@ -232,7 +238,9 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
       }
       
     }
-   
+
+//   free(jsonBuffer);
+    jsonBuffer.clear();
     
 }
 //------------------------------------------------------------------------------------------------

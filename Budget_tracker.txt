@@ -4,3 +4,5 @@ ESP8266 - from xcluma - Rs350
 DHT11 - Core technologies - Rs175
 PIR motion sensor - electronicspices - Rs99 
 10uF, 0.1uF, LM7805, 9V batteries - Rs 378 + delivery(Rs130) = Rs 508
+2channel relay, bread board power supply, breadboards, 5V DC adapter - Robu.in = Rs685
+ESP8266 - from xcluma - Rs340

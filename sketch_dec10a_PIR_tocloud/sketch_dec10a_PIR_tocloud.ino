@@ -158,12 +158,12 @@ void loop() {
 //  int humidity=random(50,83);
   if(i==1)
   {
-    snprintf(fakedata,sizeof(fakedata),"{\"Channel\" : 1, \"Motion\":1}"); 
+    snprintf(fakedata,sizeof(fakedata),"{\"Channel\": 1, \"Motion\": 1}"); 
     
   }
   else
   {
-    snprintf(fakedata,sizeof(fakedata),"{\"Channel\" : 1, \"Motion\":0}");
+    snprintf(fakedata,sizeof(fakedata),"{\"Channel\": 1, \"Motion\": 0}");
    
   }
   if (millis() - lastPublish > 2000) {
