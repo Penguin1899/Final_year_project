@@ -6,8 +6,11 @@ extern "C" {
 #include "libb64/cdecode.h"
 }
 
-const char* ssid = "BRINDAVANA.";
-const char* password = "jyothinaresh";
+const char* ssid = "AWSIOT";
+const char* password = "BMSCE2021!";
+
+//const char* ssid = "BRINDAVANA.";
+//const char* password = "jyothinaresh";
 
 // Find this awsEndpoint in the AWS Console: Manage - Things, choose your thing
 // choose Interact, its the HTTPS Rest endpoint 
@@ -154,6 +157,8 @@ void loop() {
 
   pubSubCheckConnect();
 
+  
+
 }
 
 //------------------------------------------------------------------------------------------------
@@ -180,14 +185,14 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
    {
     if(motionFlag==1)
      {
-            if((millis()-lastOn >=10000))
+            if((millis()-lastOn >=60000))
             {
              int t = root["Motion"];
          
                if(t==1)
                {
                   motionFlag = 1;      
-                  totalOntime  = totalOntime + 10;                
+                  totalOntime  = totalOntime + 1;                
                   digitalWrite(LED_BUILTIN,LOW);
                   digitalWrite(5,LOW);
                   lastOn = millis();  
@@ -211,13 +216,13 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
                if(t==1)
                {
                   motionFlag = 1;      
-                  totalOntime  = totalOntime + 10;                
+                  totalOntime  = totalOntime + 1;                
                   digitalWrite(LED_BUILTIN,LOW);
                   digitalWrite(5,LOW);
                   lastOn = millis();  
                }
                else
-               {
+               { 
                   motionFlag = 0;
                   digitalWrite(LED_BUILTIN,HIGH);
                   digitalWrite(5,HIGH);
@@ -235,6 +240,7 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
       if((motionFlag==1)&&((te>28)||(hm>75)))
       {
         //do something like turn on a fan
+        //digitalWrite(4,LOW);
       }
       
     }

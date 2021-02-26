@@ -5,8 +5,11 @@ extern "C" {
 #include "libb64/cdecode.h"
 }
 
-const char* ssid = "BRINDAVANA.";
-const char* password = "jyothinaresh";
+const char* ssid = "AWSIOT";
+const char* password = "BMSCE2021!";
+
+//const char* ssid = "BRINDAVANA.";
+//const char* password = "jyothinaresh";
 
 // Find this awsEndpoint in the AWS Console: Manage - Things, choose your thing
 // choose Interact, its the HTTPS Rest endpoint 
@@ -99,8 +102,8 @@ WiFiClientSecure wiFiClient;
 void msgReceived(char* topic, byte* payload, unsigned int len);
 PubSubClient pubSubClient(awsEndpoint, 8883, msgReceived, wiFiClient); 
 
-//The above command uses port83 - HTTPS
-//To use MQTT, use port 443
+//The above command uses port8883 - MQTT
+//To use HTTPS, use port 443
 //PubSubClient pubSubClient(awsEndpoint, 443, msgReceived, wiFiClient);
 
 //------------------------------------------------------------------------------------------------

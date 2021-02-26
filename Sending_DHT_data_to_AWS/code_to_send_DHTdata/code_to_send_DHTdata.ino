@@ -10,11 +10,11 @@ extern "C" {
 #define DHTTYPE DHT11 // DHT 11
 DHT dht(DHTPIN, DHTTYPE);
 
-//const char* ssid = "ONEPLUS_co_apzxnl";
-//const char* password = "zxnl7921";
+const char* ssid = "AWSIOT";
+const char* password = "BMSCE2021!";
 
-const char* ssid = "BRINDAVANA.";
-const char* password = "jyothinaresh";
+//const char* ssid = "BRINDAVANA.";
+//const char* password = "jyothinaresh";
 
 // Find this awsEndpoint in the AWS Console: Manage - Things, choose your thing
 // choose Interact, its the HTTPS Rest endpoint 
