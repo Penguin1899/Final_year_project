@@ -5,11 +5,11 @@ extern "C" {
 #include "libb64/cdecode.h"
 }
 
-const char* ssid = "AWSIOT";
-const char* password = "BMSCE2021!";
+//const char* ssid = "AWSIOT";
+//const char* password = "BMSCE2021!";
 
-//const char* ssid = "BRINDAVANA.";
-//const char* password = "jyothinaresh";
+const char* ssid = "BRINDAVANA.";
+const char* password = "jyothinaresh";
 
 // Find this awsEndpoint in the AWS Console: Manage - Things, choose your thing
 // choose Interact, its the HTTPS Rest endpoint 
@@ -132,50 +132,43 @@ void setup() {
   len = b64decode(caPemCrt, binaryCA);
   wiFiClient.setCACert(binaryCA, len);
 
-//  Serial.print("Sensor Calibrating..wait for 2mins.");
-//  int j=120;
-//  while(j>0)
-//  { 
-//    Serial.print(".");
-//    delay(1000);
-//    j--;
-//  }
-//  Serial.print("\n");
 }
 //------------------------------------------------------------------------------------------------
 
-
-unsigned long lastPublish;
+unsigned long lastPublish=0;
 int msgCount;
 byte i;
-byte motion_detected;
+int prev=0,diff=0;
 
 //------------------------------------------------------------------------------------------------
 void loop() {
 
   pubSubCheckConnect();
 
-  i = digitalRead(16);
-  char fakedata[256];
-//  int temp=random(20,35);
-//  int humidity=random(50,83);
-  if(i==1)
-  {
-    snprintf(fakedata,sizeof(fakedata),"{\"Channel\": 1, \"Motion\": 1}"); 
+  if(millis()-lastPublish>2000)
+  { 
+    i = digitalRead(16); 
+    char fakedata[256];
     
-  }
-  else
-  {
-    snprintf(fakedata,sizeof(fakedata),"{\"Channel\": 1, \"Motion\": 0}");
-   
-  }
-  if (millis() - lastPublish > 2000) {
-    //String msg = String("Hello from ESP8266: Penguin here ") + ++msgCount;
-    pubSubClient.publish("motionChannel",fakedata); //msg.c_str());
-    Serial.print("Published: "); Serial.println(fakedata);
-//    if(i==1){delay(10000);}
-//    else{delay(2000);}
-    lastPublish = millis();
+    if(i==1)
+    {
+      snprintf(fakedata,sizeof(fakedata),"{\"Channel\": 1, \"Motion\": 1}"); 
+      
+    }
+    else
+    {
+      snprintf(fakedata,sizeof(fakedata),"{\"Channel\": 1, \"Motion\": 0}");
+     
+    }
+  
+    diff = (prev-i==0)?0:1;
+    prev = i;
+    
+    if ((millis() - lastPublish > 2000) &&(diff==1)) {
+      pubSubClient.publish("motionChannel",fakedata); //msg.c_str());
+      Serial.print("Published: "); Serial.println(fakedata);
+      lastPublish = millis();
+    }
   }
 }
 //------------------------------------------------------------------------------------------------

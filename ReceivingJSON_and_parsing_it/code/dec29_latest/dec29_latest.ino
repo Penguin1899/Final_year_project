@@ -6,11 +6,11 @@ extern "C" {
 #include "libb64/cdecode.h"
 }
 
-const char* ssid = "AWSIOT";
-const char* password = "BMSCE2021!";
+//const char* ssid = "AWSIOT";
+//const char* password = "BMSCE2021!";
 
-//const char* ssid = "BRINDAVANA.";
-//const char* password = "jyothinaresh";
+const char* ssid = "BRINDAVANA.";
+const char* password = "jyothinaresh";
 
 // Find this awsEndpoint in the AWS Console: Manage - Things, choose your thing
 // choose Interact, its the HTTPS Rest endpoint 
@@ -103,10 +103,6 @@ WiFiClientSecure wiFiClient;
 void msgReceived(char* topic, byte* payload, unsigned int len);
 PubSubClient pubSubClient(awsEndpoint, 8883, msgReceived, wiFiClient); 
 
-//The above command uses port8883 - MQTT
-//To use HTTPS, use port 443
-//PubSubClient pubSubClient(awsEndpoint, 443, msgReceived, wiFiClient);
-
 //------------------------------------------------------------------------------------------------
 void setup() {
   Serial.begin(115200); Serial.println();
@@ -145,6 +141,8 @@ unsigned long lastOn=0;
 unsigned int motionFlag=0;
 unsigned long totalOntime=0;
 int msgCount;
+char pubdata[256];
+
 //StaticJsonBuffer<200> jsonBuffer;
 
 //DynamicJsonBuffer jsonBuffer(50);
@@ -156,8 +154,6 @@ int msgCount;
 void loop() {
 
   pubSubCheckConnect();
-
-  
 
 }
 
@@ -195,7 +191,7 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
                   totalOntime  = totalOntime + 1;                
                   digitalWrite(LED_BUILTIN,LOW);
                   digitalWrite(5,LOW);
-                  lastOn = millis();  
+                  lastOn = millis(); 
                }
                else
                {
@@ -204,8 +200,12 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
                   digitalWrite(5,HIGH);
                }
     
-         Serial.println("total on time :");
-         Serial.println(totalOntime);
+            Serial.println("total on time :");
+            Serial.println(totalOntime);
+
+            snprintf(pubdata,sizeof(pubdata),"{\"Channel\": 3,\"Light Number\": 1, \"Total On Time\": %lu}",totalOntime);
+            pubSubClient.publish("PowerChannel",pubdata);
+            
           }
       }
 
@@ -230,7 +230,9 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
     
          Serial.println("total on time :");
          Serial.println(totalOntime);
-        
+
+         snprintf(pubdata,sizeof(pubdata),"{\"Channel\": 3,\"Light Number\": 1, \"Total On Time\": %lu}",totalOntime);
+         pubSubClient.publish("PowerChannel",pubdata);
       }
     }
     else if(c==2)

@@ -10,11 +10,11 @@ extern "C" {
 #define DHTTYPE DHT11 // DHT 11
 DHT dht(DHTPIN, DHTTYPE);
 
-const char* ssid = "AWSIOT";
-const char* password = "BMSCE2021!";
+//const char* ssid = "AWSIOT";
+//const char* password = "BMSCE2021!";
 
-//const char* ssid = "BRINDAVANA.";
-//const char* password = "jyothinaresh";
+const char* ssid = "BRINDAVANA.";
+const char* password = "jyothinaresh";
 
 // Find this awsEndpoint in the AWS Console: Manage - Things, choose your thing
 // choose Interact, its the HTTPS Rest endpoint 
@@ -155,11 +155,8 @@ void loop() {
   pubSubCheckConnect();
 
   char fakedata[256];
-//  int temp=random(20,35);
-//  int humidity=random(50,83);
   
-  h = dht.readHumidity();
-  
+  h = dht.readHumidity();  
   t = dht.readTemperature();
 
   if (isnan(h) || isnan(t)) 
@@ -170,8 +167,7 @@ void loop() {
 
   snprintf(fakedata,sizeof(fakedata),"{\"Channel\" : 2, \"temp\" :%f,\"humidity\" :%f}",t,h); 
   
-  if (millis() - lastPublish > 10000) {
-    //String msg = String("Hello from ESP8266: Penguin here ") + ++msgCount;
+  if (millis() - lastPublish > 360000) {
     pubSubClient.publish("DHTChannel",fakedata); //msg.c_str());
     Serial.print("Published: "); Serial.println(fakedata);
     lastPublish = millis();
