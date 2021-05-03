@@ -109,6 +109,8 @@ PubSubClient pubSubClient(awsEndpoint, 8883, msgReceived, wiFiClient);
 //------------------------------------------------------------------------------------------------
 void setup() {
   Serial.begin(115200); Serial.println();
+
+  //PIR sensor connected to pin16
   pinMode (16,INPUT);
   Serial.println("ESP8266 AWS IoT Example");
 
@@ -152,12 +154,12 @@ void loop() {
     
     if(i==1)
     {
-      snprintf(fakedata,sizeof(fakedata),"{\"Channel\": 1, \"Motion\": 1}"); 
+      snprintf(fakedata,sizeof(fakedata),"{\"Channel\": 1, \"Motion\": 1, \"device_num\": 1, \"actuator_num\": 1}"); 
       
     }
     else
     {
-      snprintf(fakedata,sizeof(fakedata),"{\"Channel\": 1, \"Motion\": 0}");
+      snprintf(fakedata,sizeof(fakedata),"{\"Channel\": 1, \"Motion\": 0, \"device_num\": 1, \"actuator_num\": 1}");
      
     }
   

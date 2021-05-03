@@ -1,5 +1,6 @@
 Ordered components :
 
+Rohith :
 ESP8266 - from xcluma - Rs350
 DHT11 - Core technologies - Rs175
 PIR motion sensor - electronicspices - Rs99 
@@ -7,5 +8,13 @@ PIR motion sensor - electronicspices - Rs99
 2channel relay, bread board power supply, breadboards, 5V DC adapter - Robu.in = Rs685
 ESP8266 - from xcluma - Rs340
 
+ESP8266 - from easy electronics - Rs425
+PIR motion sensor - electronicspices - Rs99 
+3.7v Battery - robocraze - Rs312
+7.4v Battery - MAEnt - Rs 599
+12v DC adapter - Care n touch, Rs 269
+Delivery Charges by Amazon - Rs 157
+
+Taeesh :
 7th sem Report print - Rs675
 7th sem poster print - Rs50

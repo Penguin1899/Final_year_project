@@ -165,9 +165,9 @@ void loop() {
     t = 0;
   }
 
-  snprintf(fakedata,sizeof(fakedata),"{\"Channel\" : 2, \"temp\" :%f,\"humidity\" :%f}",t,h); 
+  snprintf(fakedata,sizeof(fakedata),"{\"Channel\" : 2, \"temp\" :%f,\"humidity\" :%f, \"device_num\": 0, \"actuator_num\": 1}",t,h); 
   
-  if (millis() - lastPublish > 360000) {
+  if (millis() - lastPublish > 120000) {
     pubSubClient.publish("DHTChannel",fakedata); //msg.c_str());
     Serial.print("Published: "); Serial.println(fakedata);
     lastPublish = millis();

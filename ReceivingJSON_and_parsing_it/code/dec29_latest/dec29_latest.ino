@@ -104,9 +104,21 @@ void msgReceived(char* topic, byte* payload, unsigned int len);
 PubSubClient pubSubClient(awsEndpoint, 8883, msgReceived, wiFiClient); 
 
 //------------------------------------------------------------------------------------------------
+
+long fixed_motion_on_time = 60000;
+int this_node_num = 1;
+
+//------------------------------------------------------------------------------------------------
+
 void setup() {
   Serial.begin(115200); Serial.println();
+
+  //gpio5 connected to a relay
   pinMode(5,OUTPUT);
+
+  //gpio4 connected to a relay
+  pinMode(4,OUTPUT);
+  
   pinMode(LED_BUILTIN,OUTPUT);
  
   Serial.println("ESP8266 AWS IoT Example");
@@ -137,11 +149,16 @@ void setup() {
 
 
 unsigned long lastPublish;
-unsigned long lastOn=0;
-unsigned int motionFlag=0;
-unsigned long totalOntime=0;
+
+//laston[1] -> corresponds to the time when device[1] was laston
+unsigned long lastOn[]={0,0,0,0};
+//motionflag[1] -> corresponds to if device[1] had motion detected in last data point it got
+unsigned int motionFlag[]={0,0,0,0};
+
+unsigned long totalOntime[]={0,0,0,0};
 int msgCount;
 char pubdata[256];
+int x;
 
 //StaticJsonBuffer<200> jsonBuffer;
 
@@ -177,33 +194,44 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
     }
 
    int c = root["Channel"];
-   if(c==1)
+   int act_num = root["actuator_num"];
+   int device_num = root["device_num"];
+
+   switch(device_num)
    {
-    if(motionFlag==1)
+    case 1: x=5; break;
+    case 2: x=4; break;
+    //case(3): x=10;
+   }
+
+   //logic to check if motion device sent data or DHT device. The logic also decides if we need to turn on a device and which device
+   if((c==1)&&(act_num==this_node_num))
+   {
+    if(motionFlag[device_num]==1)
      {
-            if((millis()-lastOn >=60000))
+            if((millis()-lastOn[device_num] >=fixed_motion_on_time))
             {
              int t = root["Motion"];
          
                if(t==1)
                {
-                  motionFlag = 1;      
-                  totalOntime  = totalOntime + 1;                
+                  motionFlag[device_num] = 1;      
+                  totalOntime[device_num]  = totalOntime[device_num] + 1;                
                   digitalWrite(LED_BUILTIN,LOW);
-                  digitalWrite(5,LOW);
-                  lastOn = millis(); 
+                  digitalWrite(x,LOW);
+                  
+                  lastOn[device_num] = millis(); 
                }
                else
                {
-                  motionFlag = 0;
+                  motionFlag[device_num] = 0;
                   digitalWrite(LED_BUILTIN,HIGH);
-                  digitalWrite(5,HIGH);
+                  digitalWrite(x,HIGH);
                }
-    
-            Serial.println("total on time :");
-            Serial.println(totalOntime);
 
-            snprintf(pubdata,sizeof(pubdata),"{\"Channel\": 3,\"Light Number\": 1, \"Total On Time\": %lu}",totalOntime);
+            Serial.println("total on time :");
+            Serial.println(totalOntime[device_num]);
+            snprintf(pubdata,sizeof(pubdata),"{\"Channel\": 3,\"Light Number\": %d, \"Total On Time\": %lu, \"actuator_node\": %d}",device_num,totalOntime[device_num],this_node_num);
             pubSubClient.publish("PowerChannel",pubdata);
             
           }
@@ -215,31 +243,32 @@ void msgReceived(char* topic, byte* payload, unsigned int length) {
          
                if(t==1)
                {
-                  motionFlag = 1;      
-                  totalOntime  = totalOntime + 1;                
+                  motionFlag[device_num] = 1;      
+                  totalOntime[device_num]  = totalOntime[device_num] + 1;                
                   digitalWrite(LED_BUILTIN,LOW);
-                  digitalWrite(5,LOW);
-                  lastOn = millis();  
+                  digitalWrite(x,LOW);
+
+                  lastOn[device_num] = millis();  
                }
                else
                { 
-                  motionFlag = 0;
+                  motionFlag[device_num] = 0;
                   digitalWrite(LED_BUILTIN,HIGH);
-                  digitalWrite(5,HIGH);
+                  digitalWrite(x,HIGH);
                }
     
          Serial.println("total on time :");
-         Serial.println(totalOntime);
+         Serial.println(totalOntime[device_num]);
 
-         snprintf(pubdata,sizeof(pubdata),"{\"Channel\": 3,\"Light Number\": 1, \"Total On Time\": %lu}",totalOntime);
+         snprintf(pubdata,sizeof(pubdata),"{\"Channel\": 3,\"Light Number\": %d, \"Total On Time\": %lu, \"actuator_node\": %d}",device_num,totalOntime[device_num],this_node_num);
          pubSubClient.publish("PowerChannel",pubdata);
       }
     }
-    else if(c==2)
+    else if((c==2)&&(act_num==this_node_num))
     {
       int te = root["temp"];
       int hm = root["humidity"];
-      if((motionFlag==1)&&((te>28)||(hm>75)))
+      if((motionFlag[device_num]==1)&&((te>28)||(hm>75)))
       {
         //do something like turn on a fan
         //digitalWrite(4,LOW);
