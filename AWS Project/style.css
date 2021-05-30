@@ -1,0 +1,68 @@
+
+    body
+    {
+
+      background-image: url(https://source.unsplash.com/1600x900/?landscape);
+    }
+    nav.navbar.navbar-expand-md.navbar-dark {
+        background-color: #000000d0;
+    }
+
+    
+    .boxy
+     {
+
+        background: #000000d0;
+        color: white;
+        /* padding: 2em; */
+        border-radius: 10px;
+        /* width: 100%; */
+        /* max-width: 420px; */
+        /* margin: 1em; */
+        font-family: 'Bitter', serif;
+        /* font-size: 10px; */
+    }
+
+    .carousel_temp
+     {
+        text-align: center;
+        /* background: #000000d0; */
+        color: white;
+        /* padding: 2em; */
+        border-radius: 10px;
+        height : 70px;
+        width: 100%;
+        /* max-width: 1100px; */
+        /* margin-left: 80px; */
+        font-family: 'Bitter', serif;
+        /* font-size: 10px; */
+    }
+
+    .top_carousel
+    {
+      text-align: center;
+      background: #000000d0;
+      color: white;
+      /* padding: 2em; */
+      border-radius: 10px;
+    }
+
+    nav.navbar.navbar-expand-md.navbar-dark {
+        font-family: 'Bitter',serif;
+    }
+
+    .form-container{
+        position:absolute;
+        top:15vh;
+        background:#000000d0 ;
+        color: white;
+        padding:40px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px #000;
+        font-family: 'Bitter', serif;
+        }
+    
+    #login{
+        text-align: center;
+        font-size: 30px;
+    }
