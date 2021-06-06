@@ -1,14 +1,14 @@
 
     body
     {
-
       background-image: url(https://source.unsplash.com/1600x900/?landscape);
+      background-size: cover;
     }
     nav.navbar.navbar-expand-md.navbar-dark {
         background-color: #000000d0;
     }
 
-    
+
     .boxy
      {
 
@@ -16,7 +16,7 @@
         color: white;
         border-radius: 10px;
         font-family: 'Bitter', serif;
-        
+
     }
 
     .carousel_temp
@@ -51,7 +51,7 @@
         box-shadow: 0px 0px 10px 0px #000;
         font-family: 'Bitter', serif;
         }
-    
+
     #login{
         text-align: center;
         font-size: 30px;
