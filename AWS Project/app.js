@@ -1,4 +1,6 @@
 
+// var is_looged_in = 0;
+
 if ($("body").data("title") === "login") {
 
   var login_submit_button = document.querySelector('#login_btn')
@@ -71,6 +73,7 @@ if ($("body").data("title") === "login") {
 
 
  else{
+
   var contentone =  document.querySelector('#Temp')
   var contentwo =  document.querySelector('#Humid')
   var par1,par2;
