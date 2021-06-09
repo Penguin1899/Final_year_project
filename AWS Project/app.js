@@ -73,6 +73,11 @@ if ($("body").data("title") === "login") {
 
 
  else{
+  //For master control
+  var masteroff_btn = document.querySelector('#masteroff_btn')
+  var masteron_btn = document.querySelector('#masteron_btn')
+  var masterreset_btn = document.querySelector('#masterreset_btn')
+
 
   var contentone =  document.querySelector('#Temp')
   var contentwo =  document.querySelector('#Humid')
@@ -95,6 +100,24 @@ if ($("body").data("title") === "login") {
   var tb_1_arr = [0,0,0,0];
   var tb_3_arr = [0,0,0,0];
   var tb_2_arr = [0,0,0,0];
+
+
+  //onclick event for master control
+
+  masteroff_btn.onclick=function(){
+  console.log('U have entered masteroff() function')
+  masteroff();
+  }
+
+  masteron_btn.onclick=function(){
+  console.log('U have entered masteron() function')
+  masteron();
+  }
+
+  masterreset_btn.onclick=function(){
+  console.log('U have entered masterreset() function')
+  masterreset();
+  }
 
 
   tb1_btn.onclick = function(){
@@ -156,6 +179,61 @@ if ($("body").data("title") === "login") {
           })
 
   })
+
+
+
+  // Functions for master control
+
+  function masteroff(){
+  var x = document.querySelector('#masteroff').value
+  console.log(x)
+  var base_url = "https://1f9wlskr90.execute-api.ap-south-1.amazonaws.com/deploy?value=OFF&actuator_num="
+  var final_url = base_url + x
+  console.log("The url is",final_url)
+  $.ajax({
+
+    url: final_url,
+    type: "GET",
+
+    success: function json_func1(result)
+    {
+      console.log(result);
+    }})
+  }
+
+  function masteron(){
+    var x = document.querySelector('#masteron').value
+    console.log(x)
+    var base_url = "https://1f9wlskr90.execute-api.ap-south-1.amazonaws.com/deploy?value=ON&actuator_num="
+    var final_url = base_url + x
+    console.log("The url is",final_url)
+    $.ajax({
+  
+      url: final_url,
+      type: "GET",
+  
+      success: function json_func1(result)
+      {
+        console.log(result);
+      }})
+    }
+
+function masterreset(){
+var x = document.querySelector('#masterreset').value
+console.log(x)
+var base_url = "https://1f9wlskr90.execute-api.ap-south-1.amazonaws.com/deploy?value=RESET&actuator_num="
+var final_url = base_url + x
+console.log("The url is",final_url)
+$.ajax({
+
+  url: final_url,
+  type: "GET",
+
+  success: function json_func1(result)
+  {
+    console.log(result);
+  }})
+}
 
 
   function api_call2(){
