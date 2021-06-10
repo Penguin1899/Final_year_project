@@ -186,55 +186,86 @@ if ($("body").data("title") === "login") {
   // Functions for master control
 
   function masteroff(){
-  var x = document.querySelector('#masteroff').value
-  console.log(x)
-  var base_url = "https://1f9wlskr90.execute-api.ap-south-1.amazonaws.com/deploy?value=OFF&actuator_num="
-  var final_url = base_url + x
-  console.log("The url is",final_url)
-  $.ajax({
+    var x = document.querySelector('#masteroff').value
+    // console.log(x)
+    var base_url = "https://1f9wlskr90.execute-api.ap-south-1.amazonaws.com/deploy?value=OFF&actuator_num="
+    var final_url = base_url + x
+    console.log("The url is",final_url)
+    $.ajax({
 
-    url: final_url,
-    type: "GET",
+      url: final_url,
+      type: "GET",
 
-    success: function json_func1(result)
-    {
-      console.log(result);
-    }})
+      success: function json_func1(result)
+      {
+        console.log(result);
+        var y = document.querySelector('#masteroff');
+        y.value = ' ';
+      },
+
+      error: function err_func(xhr, status, error)
+      {
+        console.log('error occured');
+        var y = document.querySelector('#masteroff');
+        y.value = ' ';
+      }
+    })
   }
 
   function masteron(){
     var x = document.querySelector('#masteron').value
-    console.log(x)
+    // console.log(x)
     var base_url = "https://1f9wlskr90.execute-api.ap-south-1.amazonaws.com/deploy?value=ON&actuator_num="
     var final_url = base_url + x
     console.log("The url is",final_url)
     $.ajax({
-  
+
       url: final_url,
       type: "GET",
-  
+
       success: function json_func1(result)
       {
         console.log(result);
-      }})
-    }
+        var y = document.querySelector('#masteron');
+        y.value = ' ';
+      },
 
-function masterreset(){
-var x = document.querySelector('#masterreset').value
-console.log(x)
-var base_url = "https://1f9wlskr90.execute-api.ap-south-1.amazonaws.com/deploy?value=RESET&actuator_num="
-var final_url = base_url + x
-console.log("The url is",final_url)
-$.ajax({
+      error: function err_func(xhr, status, error)
+      {
+        console.log('error occured');
+        var y = document.querySelector('#masteron');
+        y.value = ' ';
+      }
+    })
 
-  url: final_url,
-  type: "GET",
+  }
 
-  success: function json_func1(result)
-  {
-    console.log(result);
-  }})
-}
+  function masterreset(){
+    var x = document.querySelector('#masterreset').value
+    // console.log(x)
+    var base_url = "https://1f9wlskr90.execute-api.ap-south-1.amazonaws.com/deploy?value=RESET&actuator_num="
+    var final_url = base_url + x
+    console.log("The url is",final_url)
+    $.ajax({
+
+      url: final_url,
+      type: "GET",
+
+      success: function json_func1(result)
+      {
+        console.log(result);
+        var y = document.querySelector('#masterreset');
+        y.value = ' ';
+      },
+
+      error: function err_func(xhr, status, error)
+      {
+        console.log('error occured');
+        var y = document.querySelector('#masterreset');
+        y.value = ' ';
+      }
+    })
+  }
 
 
   function api_call2(){
