@@ -49,6 +49,7 @@ if ($("body").data("title") === "login") {
                   if (result_string.includes("YES")){
                       console.log('User has been successfully validated');
                       window.location.replace("index.html")
+                      //is_logged_in = 1;
                   }
                   else{
 
